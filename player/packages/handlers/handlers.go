@@ -17,6 +17,7 @@ func GetPlayers(w http.ResponseWriter, r *http.Request) {
 	players := players.Players{
 		players.Player{Name: "Aude", Class: "Mage", Level: 60},
 		players.Player{Name: "Phil", Class: "Priest", Level: 60},
+		players.Player{Name: "Oysto", Class: "Rogue", Level: 60},
 	}
 
 	if err := json.NewEncoder(w).Encode(players); err != nil {
