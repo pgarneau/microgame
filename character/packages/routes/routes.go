@@ -22,13 +22,19 @@ var AllRoutes = Routes{
 		handlers.Index,
 	},
 	Route{
-		"Players",
+		"ListCharacters",
 		"GET",
 		"/characters",
 		handlers.ListCharacters,
 	},
 	Route{
-		"Player",
+		"CreateCharacter",
+		"POST",
+		"/characters",
+		handlers.CreateCharacter,
+	},
+	Route{
+		"Character",
 		"GET",
 		"/characters/{name}",
 		handlers.GetCharacter,

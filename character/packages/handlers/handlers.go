@@ -5,28 +5,58 @@ import (
 	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/pgarneau/microgame/character/packages/character"
+	"github.com/pgarneau/microgame/character/packages/database"
 	"html"
+	"io"
+	"io/ioutil"
 	"net/http"
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
+
 	fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
 }
 
 func ListCharacters(w http.ResponseWriter, r *http.Request) {
-	characters := character.Characters{
-		character.Character{Name: "Aude", Class: "Mage", Level: 60},
-		character.Character{Name: "Phil", Class: "Priest", Level: 60},
-		character.Character{Name: "Oysto", Class: "Rogue", Level: 60},
+	w.Header().Set("Content-Type", "application/json;charset=UTF-8")
+	w.WriteHeader(http.StatusOK)
+
+	if err := json.NewEncoder(w).Encode(database.AllCharacters); err != nil {
+		panic(err)
+	}
+}
+
+func CreateCharacter(w http.ResponseWriter, r *http.Request) {
+	var character character.Character
+	body, err := ioutil.ReadAll(io.LimitReader(r.Body, 1048576))
+
+	if err != nil {
+		panic(err)
+	}
+	if err := r.Body.Close(); err != nil {
+		panic(err)
+	}
+	if err := json.Unmarshal(body, &character); err != nil {
+		w.Header().Set("Content-Type", "application/json;charset=UTF-8")
+		w.WriteHeader(422) // unprocessable entity
+		if err := json.NewEncoder(w).Encode(err); err != nil {
+			panic(err)
+		}
 	}
 
-	if err := json.NewEncoder(w).Encode(characters); err != nil {
+	c := database.CreateCharacter(character)
+	w.Header().Set("Content-Type", "application/json;charset=UTF-8")
+	w.WriteHeader(http.StatusCreated)
+	if err := json.NewEncoder(w).Encode(c); err != nil {
 		panic(err)
 	}
 }
 
 func GetCharacter(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	character := vars["character"]
-	fmt.Fprintln(w, "Selected Player:", character)
+	characterName := vars["name"]
+	character := database.GetCharacter(characterName)
+	fmt.Fprintln(w, "Selected Character:", character.Name)
+	fmt.Fprintln(w, "Character Class:", character.Class)
+	fmt.Fprintln(w, "Character Level:", character.Level)
 }
