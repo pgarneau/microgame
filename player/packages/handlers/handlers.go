@@ -13,7 +13,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
 }
 
-func GetPlayers(w http.ResponseWriter, r *http.Request) {
+func ListPlayers(w http.ResponseWriter, r *http.Request) {
 	players := players.Players{
 		players.Player{Name: "Aude", Class: "Mage", Level: 60},
 		players.Player{Name: "Phil", Class: "Priest", Level: 60},
