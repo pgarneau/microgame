@@ -1,7 +1,6 @@
 package routes
 
 import (
-	"github.com/gorilla/mux"
 	"github.com/pgarneau/microgame/player/packages/handlers"
 	"net/http"
 )
@@ -15,20 +14,7 @@ type Route struct {
 
 type Routes []Route
 
-func NewRouter() *mux.Router {
-	router := mux.NewRouter().StrictSlash(true)
-	for _, route := range routes {
-		router.
-			Methods(route.Method).
-			Path(route.Pattern).
-			Name(route.Name).
-			Handler(route.HandleFunc)
-	}
-
-	return router
-}
-
-var routes = Routes{
+var AllRoutes = Routes{
 	Route{
 		"Index",
 		"GET",
