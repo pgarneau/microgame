@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/pgarneau/microgame/player/packages/router"
+	"github.com/pgarneau/microgame/character/packages/router"
 	"log"
 	"net/http"
 )

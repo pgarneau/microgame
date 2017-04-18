@@ -1,9 +1,9 @@
-package players
+package character
 
-type Player struct {
+type Character struct {
 	Name  string `json:"name"`
 	Class string `json:"class"`
 	Level int    `json:"level"`
 }
 
-type Players []Player
+type Characters []Character

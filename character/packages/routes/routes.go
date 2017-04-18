@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"github.com/pgarneau/microgame/player/packages/handlers"
+	"github.com/pgarneau/microgame/character/packages/handlers"
 	"net/http"
 )
 
@@ -24,13 +24,13 @@ var AllRoutes = Routes{
 	Route{
 		"Players",
 		"GET",
-		"/players",
-		handlers.GetPlayers,
+		"/characters",
+		handlers.ListCharacters,
 	},
 	Route{
 		"Player",
 		"GET",
-		"/players/{player}",
-		handlers.GetPlayer,
+		"/characters/{name}",
+		handlers.GetCharacter,
 	},
 }

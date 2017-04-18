@@ -2,8 +2,8 @@ package router
 
 import (
 	"github.com/gorilla/mux"
-	"github.com/pgarneau/microgame/player/packages/logger"
-	"github.com/pgarneau/microgame/player/packages/routes"
+	"github.com/pgarneau/microgame/character/packages/logger"
+	"github.com/pgarneau/microgame/character/packages/routes"
 	"net/http"
 )
 
