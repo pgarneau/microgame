@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/pgarneau/microgame/character/packages/router"
+	"app/route"
 	"log"
 	"net/http"
 )
 
 func main() {
-	router := router.NewRouter()
+	router := route.NewRouter()
 
 	log.Fatal(http.ListenAndServe(":8080", router))
 }

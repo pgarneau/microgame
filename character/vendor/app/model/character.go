@@ -1,4 +1,4 @@
-package character
+package model
 
 type Character struct {
 	Name  string `json:"name"`

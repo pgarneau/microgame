@@ -1,11 +1,11 @@
-package handlers
+package controller
 
 import (
+	"app/model"
+	"app/shared/database"
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
-	"github.com/pgarneau/microgame/character/packages/character"
-	"github.com/pgarneau/microgame/character/packages/database"
 	"html"
 	"io"
 	"io/ioutil"
@@ -27,7 +27,7 @@ func ListCharacters(w http.ResponseWriter, r *http.Request) {
 }
 
 func CreateCharacter(w http.ResponseWriter, r *http.Request) {
-	var character character.Character
+	var character model.Character
 	body, err := ioutil.ReadAll(io.LimitReader(r.Body, 1048576))
 
 	if err != nil {

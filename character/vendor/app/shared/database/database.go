@@ -1,29 +1,29 @@
 package database
 
 import (
+	"app/model"
 	"fmt"
-	"github.com/pgarneau/microgame/character/packages/character"
 )
 
 var currentID int
 
-var AllCharacters character.Characters
+var AllCharacters model.Characters
 
 // Give us some OG data
 func init() {
 }
 
-func GetCharacter(name string) character.Character {
+func GetCharacter(name string) model.Character {
 	for _, c := range AllCharacters {
 		if c.Name == name {
 			return c
 		}
 	}
 	// return empty Character if not found
-	return character.Character{}
+	return model.Character{}
 }
 
-func CreateCharacter(c character.Character) character.Character {
+func CreateCharacter(c model.Character) model.Character {
 	currentID += 1
 	c.ID = currentID
 	AllCharacters = append(AllCharacters, c)
