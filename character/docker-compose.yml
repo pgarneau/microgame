@@ -1,0 +1,9 @@
+postgres:
+    image: postgres:latest
+    ports:
+        - "5432" # Any port could work
+    volumes:
+        /var/lib/postgresql/data
+    environment:
+        - POSTGRES_PASSWORD=mypass
+        - 

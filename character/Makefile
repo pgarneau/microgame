@@ -8,7 +8,7 @@ endif
 
 .PHONY: all build build-dist lint test build-docker run-docker
 
-all: build build-dist lint test build-docker run-docker
+all: build build-dist lint test build-docker
 
 build:
 	go install
