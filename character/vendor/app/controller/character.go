@@ -14,16 +14,19 @@ import (
 
 func Index(w http.ResponseWriter, r *http.Request) {
 
-	fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
+	fmt.Fprintf(w, "Waddup, %q", html.EscapeString(r.URL.Path))
 }
 
 func ListCharacters(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json;charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 
+	model.ListDB()
+
 	if err := json.NewEncoder(w).Encode(database.AllCharacters); err != nil {
 		panic(err)
 	}
+
 }
 
 func CreateCharacter(w http.ResponseWriter, r *http.Request) {
