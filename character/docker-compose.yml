@@ -1,20 +1,27 @@
 version: "3"
 services:
     go:
-        build: .
+        image: character_go
         ports:
             - "8080:8080"
+        depends_on:
+            - migrate
+
+    migrate:
+        image: character_migration
+        depends_on:
+            - db
 
     db:
         image: postgres:latest
         ports:
             - "5432:5432" # random available host port will be chosen, same as -P
         volumes:
-            - data-postgres:/var/lib/postgresql/data
+            - db-postgres:/var/lib/postgresql/data
         environment:
             - POSTGRES_PASSWORD=mypass
 
 volumes:
-    data-postgres:
+    db-postgres:
 
 

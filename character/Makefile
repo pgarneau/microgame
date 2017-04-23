@@ -13,16 +13,19 @@ all: build build-dist lint test build-docker
 build:
 	go install
 	go build -o bin/${NAME}${EXT}
+	$(MAKE) -C migration/ build
 
 build-dist:
 	GOOS=linux GOARCH=amd64 go install
 	GOOS=linux GOARCH=amd64 go build -o dist/bin/${NAME}
+	$(MAKE) -C migration/ build-dist
 
 clean: clean-dist
-	-rm bin/${NAME}${EXT}
+	-rm -rf bin/
+	docker-compose down
 
 clean-dist:
-	-rm dist/bin/${NAME}
+	-rm -rf dist/
 
 lint:
 #	golint -set_exit_status ./...
@@ -32,7 +35,8 @@ test:
 #	go test -v ./...
 
 build-docker:
-	docker build -t ${NAME} .
+	docker build -t character_go .
+	$(MAKE) -C migration/ build-docker	
 
 run-docker:
-	docker run --publish 6060:8080 --name ${NAME} --rm ${NAME}
+	docker-compose up

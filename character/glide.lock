@@ -1,0 +1,14 @@
+hash: ed25ee83f33a72ffc9056ff1bba2ab129041a1b90995e975b857d2674c94911b
+updated: 2017-04-23T11:54:51.413415485-04:00
+imports:
+- name: github.com/DavidHuie/gomigrate
+  version: 4004e6142040f5d622e9d2be6e833a4652741571
+- name: github.com/gorilla/context
+  version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
+- name: github.com/gorilla/mux
+  version: 392c28fe23e1c45ddba891b0320b3b5df220beea
+- name: github.com/lib/pq
+  version: 2704adc878c21e1329f46f6e56a1c387d788ff94
+  subpackages:
+  - oid
+testImports: []
