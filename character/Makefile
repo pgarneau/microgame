@@ -6,19 +6,22 @@ else
     EXT=
 endif
 
-.PHONY: all build build-dist lint test build-docker run-docker
+.PHONY: all build build-dist dependencies lint test build-docker run-docker
 
 all: build build-dist lint test build-docker
 
-build:
+build: dependencies
 	go install
 	go build -o bin/${NAME}${EXT}
 	$(MAKE) -C migration/ build
 
-build-dist:
+build-dist: dependencies
 	GOOS=linux GOARCH=amd64 go install
 	GOOS=linux GOARCH=amd64 go build -o dist/bin/${NAME}
 	$(MAKE) -C migration/ build-dist
+
+dependencies:
+	glide install
 
 clean: clean-dist
 	-rm -rf bin/
