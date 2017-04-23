@@ -26,6 +26,7 @@ dependencies:
 
 clean: clean-dist
 	-rm -rf bin/
+	$(MAKE) -C migration/ clean
 	docker-compose down
 
 clean-dist:
@@ -39,8 +40,12 @@ test:
 #	go test -v ./...
 
 build-docker:
-	docker build -t character_go .
+	docker build -t pgarneau/character_go .
 	$(MAKE) -C migration/ build-docker	
 
 run-docker:
 	docker-compose up
+
+publish-docker:
+	docker push pgarneau/character_go
+	$(MAKE) -C migration/ publish-docker

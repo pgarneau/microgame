@@ -19,10 +19,13 @@ build-dist:
 	GOOS=linux GOARCH=amd64 go build -o dist/bin/${NAME}
 
 build-docker:
-	docker build -t character_migration .
+	docker build -t pgarneau/character_migration .
 
 clean: clean-dist
 	-rm bin/${NAME}${EXT}
 
 clean-dist:
 	-rm dist/bin/${NAME}
+
+publish-docker:
+	docker push pgarneau/character_migration
