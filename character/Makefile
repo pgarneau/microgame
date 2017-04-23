@@ -21,6 +21,7 @@ build-dist: dependencies
 	$(MAKE) -C migration/ build-dist
 
 dependencies:
+	export GOPATH=$(shell go env GOPATH); \
 	glide install
 
 clean: clean-dist
